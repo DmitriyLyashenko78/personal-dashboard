@@ -1,31 +1,60 @@
 'use client';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { WidgetShell } from '@/components/ui/WidgetShell';
-import { ArrowDownUp, Loader2, AlertCircle } from 'lucide-react';
+import { ArrowDownUp, ChevronDown, AlertCircle } from 'lucide-react';
 import styles from './CurrencyWidget.module.css';
 
-type CurrencyResponse = { base: string; date: string; rates: Record<string, number> };
+// Должен совпадать с SUPPORTED в API (кроме порядка)
+const CURRENCIES = ['USD', 'EUR', 'RUB', 'BYN', 'GBP', 'CNY'] as const;
+type Currency = (typeof CURRENCIES)[number];
+
+interface CurrencyResponse {
+    base: Currency;
+    date: string;
+    rates: Record<string, number>;
+}
 
 export function CurrencyWidget() {
+    const [base, setBase] = useState<Currency>('EUR');
+
     const { data, isLoading, error } = useQuery<CurrencyResponse>({
-        queryKey: ['currency', 'EUR'],
+        queryKey: ['currency', base],
         queryFn: async () => {
-            const res = await fetch('/api/currency?base=EUR&symbols=USD,GBP,RUB');
+            const res = await fetch(`/api/currency?base=${base}`);
             if (!res.ok) throw new Error('Network error');
             return res.json();
         },
     });
 
-    if (isLoading) {
-        return <WidgetShell title="Курсы валют" icon={<ArrowDownUp />} />;
-    }
-
     return (
         <WidgetShell title="Курсы валют" icon={<ArrowDownUp />}>
-            {error ? (
+            <div className={styles.header}>
+                <span className={styles.label}>Базовая валюта:</span>
+                <div className={styles.selectWrapper}>
+                    <select
+                        value={base}
+                        onChange={(e) => setBase(e.target.value as Currency)}
+                        className={styles.select}
+                        aria-label="Выбор базовой валюты"
+                    >
+                        {CURRENCIES.map((c) => (
+                            <option key={c} value={c}>{c}</option>
+                        ))}
+                    </select>
+                    <ChevronDown size={16} className={styles.chevron} />
+                </div>
+            </div>
+
+            {isLoading ? (
+                <div className={styles.state}>
+                    <span className={styles.loader} />
+                    Загрузка курсов...
+                </div>
+            ) : error ? (
                 <div className={styles.state}>
                     <AlertCircle size={18} />
-                    <span>Ошибка загрузки данных</span>
+                    Ошибка загрузки данных
                 </div>
             ) : (
                 <ul className={styles.list}>

@@ -1,3 +1,44 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+.selectWrapper {
+    position: relative;
+    display: inline-block;
+}
+.select {
+    appearance: none;
+    background: var(--bg-card-hover);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.4rem 2rem 0.4rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.select:hover, .select:focus {
+    border-color: var(--accent-color);
+}
+.chevron {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-muted);
+}
 .list {
     margin: 0;
     padding: 0;
@@ -25,8 +66,15 @@
 .state {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    color: var(--error-color);
+    padding: 1.5rem 0;
+    color: var(--text-muted);
     font-size: 0.875rem;
-    padding: 0.5rem 0;
+}
+.state[style*="error"] { color: var(--error-color); }
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

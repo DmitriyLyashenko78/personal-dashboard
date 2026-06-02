@@ -1,0 +1,108 @@
+.addForm {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+.input {
+    flex: 1;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s;
+}
+.input:focus {
+    border-color: var(--accent-color);
+}
+.addBtn {
+    padding: 0.35rem;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+.addBtn:hover { opacity: 0.85; }
+
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.4rem 0.5rem;
+    background: var(--bg-card-hover);
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.item:hover { background: var(--bg-skeleton); }
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    flex: 1;
+    min-width: 0;
+}
+.linkIcon { color: var(--accent-color); flex-shrink: 0; }
+.linkTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.actions {
+    display: flex;
+    gap: 0.2rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.item:hover .actions { opacity: 1; }
+
+.iconBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0.2rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, background 0.2s;
+}
+.iconBtn:hover { color: var(--text-primary); background: var(--border-color); }
+
+.editRow {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+    width: 100%;
+}
+.inputSm {
+    flex: 1;
+    padding: 0.25rem 0.4rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-widget);
+    color: var(--text-primary);
+    min-width: 0;
+}
+.editActions { display: flex; gap: 0.2rem; }

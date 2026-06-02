@@ -1,0 +1,72 @@
+.current {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.mainInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.icon { color: var(--accent-color); }
+.temp {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.details {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+.divider { opacity: 0.5; }
+.wind { display: flex; align-items: center; gap: 0.25rem; }
+
+.forecast {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.forecastItem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.25rem;
+    background: var(--bg-card-hover);
+    border-radius: 8px;
+    min-width: 0;
+}
+.dayName {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.forecastIcon { color: var(--accent-color); }
+.forecastTemp {
+    display: flex;
+    gap: 0.3rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.85rem;
+}
+.max { color: var(--text-primary); font-weight: 600; }
+.min { color: var(--text-secondary); }
+
+.state {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--error-color);
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+}
