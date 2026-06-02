@@ -80,18 +80,3 @@
     opacity: 0.7;
     text-transform: capitalize;
 }
-
-.time {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: 1px;
-}
-
-.date {
-    font-size: 0.85rem;
-    font-weight: 500;
-    opacity: 0.75;
-    text-transform: capitalize; /* Первая буква дня недели заглавная */
-}

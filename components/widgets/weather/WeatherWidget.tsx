@@ -1,10 +1,13 @@
 'use client';
+
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { WidgetShell } from '@/components/ui/WidgetShell';
 import { Cloud, Sun, CloudRain, Snowflake, CloudLightning, AlertCircle, Wind } from 'lucide-react';
 import type { LucideProps } from 'lucide-react';
+import { WeatherModal } from './WeatherModal';
 import styles from './WeatherWidget.module.css';
 import type { ComponentType } from 'react';
 
@@ -27,13 +30,44 @@ const weatherCodes: Record<number, { label: string; Icon: WeatherIcon }> = {
 
 const windDirections = ['С', 'ССВ', 'СВ', 'ВСВ', 'В', 'ВЮВ', 'ЮВ', 'ЮЮВ', 'Ю', 'ЮЮЗ', 'ЮЗ', 'ЗЮЗ', 'З', 'ЗСЗ', 'СЗ', 'ССЗ'];
 
-// Минимальная типизация ответа Open-Meteo для нашего запроса
 interface WeatherData {
-    current_weather: { temperature: number; weathercode: number; windspeed: number; winddirection: number };
-    daily: { time: string[]; weathercode: number[]; temperature_2m_max: number[]; temperature_2m_min: number[] };
+    current_weather: {
+        temperature: number;
+        weathercode: number;
+        windspeed: number;
+        winddirection: number
+    };
+    daily: {
+        time: string[];
+        weathercode: number[];
+        temperature_2m_max: number[];
+        temperature_2m_min: number[];
+        sunrise: string[];
+        sunset: string[];
+        precipitation_sum: number[];
+        windspeed_10m_max: number[];
+        uv_index_max: number[];
+    };
+    hourly: {
+        time: string[];
+        temperature_2m: number[];
+        relative_humidity_2m: number[];
+        apparent_temperature: number[];
+        precipitation_probability: number[];
+        precipitation: number[];
+        weathercode: number[];
+        windspeed_10m: number[];
+        winddirection_10m: number[];
+        pressure_msl: number[];
+        cloudcover: number[];
+        visibility: number[];
+        uv_index: number[];
+    };
 }
 
 export function WeatherWidget() {
+    const [selectedDay, setSelectedDay] = useState<number | null>(null);
+
     const { data, isLoading, error } = useQuery<WeatherData>({
         queryKey: ['weather'],
         queryFn: async () => {
@@ -54,7 +88,8 @@ export function WeatherWidget() {
 
     const cw = data?.current_weather;
     const daily = data?.daily;
-    if (!cw || !daily) return null;
+    const hourly = data?.hourly;
+    if (!cw || !daily || !hourly) return null;
 
     const code = cw.weathercode ?? 3;
     const { label, Icon } = weatherCodes[code] || { label: 'Облачно', Icon: Cloud };
@@ -89,7 +124,11 @@ export function WeatherWidget() {
                     const { Icon: DayIcon } = weatherCodes[day.code] || { Icon: Cloud };
                     const dayName = i === 0 ? 'Сегодня' : format(day.date, 'EEE', { locale: ru });
                     return (
-                        <div key={day.date.toISOString()} className={styles.forecastItem}>
+                        <div
+                            key={day.date.toISOString()}
+                            className={styles.forecastItem}
+                            onClick={() => setSelectedDay(i)}
+                        >
                             <span className={styles.dayName}>{dayName}</span>
                             <DayIcon size={20} className={styles.forecastIcon} />
                             <div className={styles.forecastTemp}>
@@ -100,6 +139,15 @@ export function WeatherWidget() {
                     );
                 })}
             </div>
+
+            {selectedDay !== null && (
+                <WeatherModal
+                    dayIndex={selectedDay}
+                    hourly={hourly}
+                    daily={daily}
+                    onClose={() => setSelectedDay(null)}
+                />
+            )}
         </WidgetShell>
     );
 }

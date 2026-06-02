@@ -5,18 +5,15 @@ import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import styles from './Header.module.css';
 
-// Внешняя переменная для кэширования времени
+// ── Кэш времени ──────────────────────────────────────────────
 let currentTime: Date | null = null;
 
-// Подписка: обновляем currentTime каждую секунду
 function subscribe(callback: () => void) {
     currentTime = new Date();
-
     const timerId = setInterval(() => {
         currentTime = new Date();
         callback();
     }, 1000);
-
     return () => clearInterval(timerId);
 }
 
@@ -28,6 +25,7 @@ function getServerSnapshot() {
     return null;
 }
 
+// ── Компонент ────────────────────────────────────────────────
 export default function Header() {
     const now = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
@@ -49,7 +47,7 @@ export default function Header() {
                         </div>
                         <span className={styles.date}>
                             {now ? format(now, 'd MMMM yyyy, EEEE', { locale: ru }) : ''}
-                        </span>
+                            </span>
                     </div>
                 </div>
             </div>

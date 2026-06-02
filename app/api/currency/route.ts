@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Добавлены GBP и CNY. Можно заменить CNY на KZT, JPY, KRW и т.д.
 const SUPPORTED = ['USD', 'EUR', 'RUB', 'BYN', 'GBP', 'CNY'] as const;
 type CurrencyCode = (typeof SUPPORTED)[number];
 

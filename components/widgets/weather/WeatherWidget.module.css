@@ -70,3 +70,13 @@
     font-size: 0.875rem;
     padding: 0.5rem 0;
 }
+
+.forecastItem {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.forecastItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

@@ -16,7 +16,6 @@ export default function DashboardPage() {
                 <WeatherWidget />
                 <EmailWidget />
                 <CalendarWidget />
-
                 <QuickLinksWidget/>
 
             </section>
