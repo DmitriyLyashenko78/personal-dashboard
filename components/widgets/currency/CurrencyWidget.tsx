@@ -5,7 +5,6 @@ import { WidgetShell } from '@/components/ui/WidgetShell';
 import { ArrowDownUp, ChevronDown, AlertCircle } from 'lucide-react';
 import styles from './CurrencyWidget.module.css';
 
-// Должен совпадать с SUPPORTED в API (кроме порядка)
 const CURRENCIES = ['USD', 'EUR', 'RUB', 'BYN', 'GBP', 'CNY'] as const;
 type Currency = (typeof CURRENCIES)[number];
 
@@ -48,11 +47,11 @@ export function CurrencyWidget() {
 
             {isLoading ? (
                 <div className={styles.state}>
-                    <span className={styles.loader} />
+                    <span className={styles.spin}>⟳</span>
                     Загрузка курсов...
                 </div>
             ) : error ? (
-                <div className={styles.state}>
+                <div className={`${styles.state} ${styles.stateError}`}>
                     <AlertCircle size={18} />
                     Ошибка загрузки данных
                 </div>

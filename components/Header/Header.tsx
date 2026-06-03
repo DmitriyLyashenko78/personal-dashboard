@@ -3,6 +3,8 @@
 import { useSyncExternalStore } from 'react';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/app/providers/ThemeProvider';
 import styles from './Header.module.css';
 
 // ── Кэш времени ──────────────────────────────────────────────
@@ -28,6 +30,7 @@ function getServerSnapshot() {
 // ── Компонент ────────────────────────────────────────────────
 export default function Header() {
     const now = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <header className={styles.header}>
@@ -38,16 +41,28 @@ export default function Header() {
                         <span className={styles.letters}>DL</span>
                         <span className={styles.bracket}>]</span>
                     </div>
-                    <div className={styles.clock}>
-                        <div className={styles.timeRow}>
-                            <span className={styles.timeLabel}>Местное время</span>
-                            <time className={styles.time}>
-                                {now ? format(now, 'HH:mm:ss') : '--:--:--'}
-                            </time>
-                        </div>
-                        <span className={styles.date}>
-                            {now ? format(now, 'd MMMM yyyy, EEEE', { locale: ru }) : ''}
+
+                    <div className={styles.right}>
+                        <button
+                            className={styles.themeToggle}
+                            onClick={toggleTheme}
+                            aria-label={theme === 'light' ? 'Тёмная тема' : 'Светлая тема'}
+                            title={theme === 'light' ? 'Тёмная тема' : 'Светлая тема'}
+                        >
+                            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                        </button>
+
+                        <div className={styles.clock}>
+                            <div className={styles.timeRow}>
+                                <span className={styles.timeLabel}>Местное время</span>
+                                <time className={styles.time}>
+                                    {now ? format(now, 'HH:mm:ss') : '--:--:--'}
+                                </time>
+                            </div>
+                            <span className={styles.date}>
+                                {now ? format(now, 'd MMMM yyyy, EEEE', { locale: ru }) : ''}
                             </span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,164 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal {
+    background: var(--bg-widget);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-border);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
+    text-transform: capitalize;
+}
+
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+.iconButton:hover {
+    background: var(--bg-skeleton);
+    color: var(--text-primary);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.navButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: var(--bg-card-hover);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+.navButton:hover {
+    background: var(--bg-skeleton);
+    border-color: var(--color-primary);
+}
+
+.todayButton {
+    background: none;
+    border: none;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent-color);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+}
+.todayButton:hover {
+    background: var(--bg-card-hover);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.weekday {
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 0.4rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.day {
+    position: relative;
+    aspect-ratio: 1;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.day:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--color-border);
+}
+
+.dayNumber {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.otherMonth .dayNumber {
+    color: var(--text-muted);
+    opacity: 0.4;
+}
+
+.today {
+    border-color: var(--accent-color);
+}
+.today .dayNumber {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.hasEvent {
+    background: rgba(168, 85, 247, 0.15); /* легкий фиолетовый оттенок */
+    border-color: rgba(168, 85, 247, 0.35);
+}
+.hasEvent .dayNumber {
+    font-weight: 600;
+    color: #a855f7;
+}
+
+.hasEvent.today {
+    background: rgba(168, 85, 247, 0.2);
+    border-color: #a855f7;
+}

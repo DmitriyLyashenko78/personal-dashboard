@@ -250,3 +250,23 @@
     color: #ffffff; border: none;
 }
 .modalButton:hover { opacity: 0.9; }
+
+.calendarIconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--accent-color);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s, transform 0.15s;
+}
+.calendarIconButton:hover {
+    background: var(--bg-card-hover);
+    transform: scale(1.1);
+}
+.calendarIconButton svg {
+    pointer-events: none; /* чтобы клик не "съедался" иконкой */
+}

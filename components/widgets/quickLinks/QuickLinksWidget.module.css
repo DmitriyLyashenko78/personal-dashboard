@@ -6,7 +6,7 @@
 .input {
     flex: 1;
     padding: 0.35rem 0.5rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: 6px;
     font-size: 0.8rem;
     background: var(--bg-card-hover);
@@ -15,11 +15,11 @@
     transition: border-color 0.2s;
 }
 .input:focus {
-    border-color: var(--accent-color);
+    border-color: var(--color-primary);
 }
 .addBtn {
     padding: 0.35rem;
-    background: var(--accent-color);
+    background: var(--color-primary);
     color: white;
     border: none;
     border-radius: 6px;
@@ -61,7 +61,7 @@
     flex: 1;
     min-width: 0;
 }
-.linkIcon { color: var(--accent-color); flex-shrink: 0; }
+.linkIcon { color: var(--color-primary); flex-shrink: 0; }
 .linkTitle {
     white-space: nowrap;
     overflow: hidden;
@@ -87,7 +87,7 @@
     justify-content: center;
     transition: color 0.2s, background 0.2s;
 }
-.iconBtn:hover { color: var(--text-primary); background: var(--border-color); }
+.iconBtn:hover { color: var(--text-primary); background: var(--color-border); }
 
 .editRow {
     display: flex;
@@ -99,7 +99,7 @@
     flex: 1;
     padding: 0.25rem 0.4rem;
     font-size: 0.8rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border);
     border-radius: 4px;
     background: var(--bg-widget);
     color: var(--text-primary);

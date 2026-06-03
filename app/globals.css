@@ -58,28 +58,26 @@ body {
   --radius-lg: 12px;
 }
 
-/* 🌓 Тёмная тема (сохраняем синюю гамму, но адаптируем под ночь) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-page: #0b1929;
-    --bg-header: #142d4c;
-    --bg-widget: #111f33;
-    --bg-card-hover: #1a365d;
-    --bg-skeleton: #234b7a;
-    --color-background: #0b1929;
-    --color-background-secondary: #142d4c;
+/* 🌓 Тёмная тема */
+html.dark {
+  --bg-page: #0b1929;
+  --bg-header: #142d4c;
+  --bg-widget: #111f33;
+  --bg-card-hover: #1a365d;
+  --bg-skeleton: #234b7a;
+  --color-background: #0b1929;
+  --color-background-secondary: #142d4c;
 
-    --border-color: #2a4a70;
-    --color-border: #2a4a70;
-    --accent-color: #63b3ed;
-    --color-primary: #63b3ed;
-    --color-primary-hover: #4299e1;
-    --error-color: #fc8181;
+  --border-color: #2a4a70;
+  --color-border: #2a4a70;
+  --accent-color: #63b3ed;
+  --color-primary: #63b3ed;
+  --color-primary-hover: #4299e1;
+  --error-color: #fc8181;
 
-    --text-primary: #e2e8f0;
-    --text-secondary: #a0aec0;
-    --text-muted: #718096;
-  }
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
 }
 
 /* =========================================

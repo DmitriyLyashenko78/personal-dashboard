@@ -23,23 +23,17 @@ export function NewsWidget() {
         },
     });
 
-    if (isLoading) {
-        return <WidgetShell title="IT-новости (RU)" icon={<Rss />} isLoading />;
-    }
+    let content: React.ReactNode;
 
     if (error) {
-        return (
-            <WidgetShell title="IT-новости (RU)" icon={<Rss />}>
-                <div className={styles.state}>
-                    <AlertCircle size={18} />
-                    <span>Ошибка загрузки новостей</span>
-                </div>
-            </WidgetShell>
+        content = (
+            <div className={styles.state}>
+                <AlertCircle size={18} />
+                <span>Ошибка загрузки новостей</span>
+            </div>
         );
-    }
-
-    return (
-        <WidgetShell title="IT-новости (RU)" icon={<Rss />}>
+    } else {
+        content = (
             <ul className={styles.list}>
                 {data?.map((item, i) => (
                     <li key={item.id} className={styles.item}>
@@ -51,19 +45,25 @@ export function NewsWidget() {
                             </a>
                         </div>
                         <div className={styles.meta}>
-              <span className={styles.author}>
-                <User size={12} />
-                  {item.author}
-              </span>
+                            <span className={styles.author}>
+                                <User size={12} />
+                                {item.author}
+                            </span>
                             <span className={styles.divider}>•</span>
-                            <span className={styles.date}>
-                <Calendar size={12} />
+                            <span className={styles.time}>
+                                <Calendar size={12} />
                                 {item.date}
-              </span>
+                            </span>
                         </div>
                     </li>
                 ))}
             </ul>
+        );
+    }
+
+    return (
+        <WidgetShell title="IT-новости (RU)" icon={<Rss />} isLoading={isLoading}>
+            {content}
         </WidgetShell>
     );
 }

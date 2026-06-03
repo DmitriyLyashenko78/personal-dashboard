@@ -1,7 +1,7 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 import { WidgetShell } from '@/components/ui/WidgetShell';
-import { Mail, Clock, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Clock, AlertCircle } from 'lucide-react';
 import styles from './EmailWidget.module.css';
 
 interface EmailItem {
@@ -20,34 +20,24 @@ export function EmailWidget() {
             if (!res.ok) throw new Error('Failed to fetch emails');
             return res.json();
         },
-        staleTime: 2 * 60 * 1000, // Обновляем каждые 2 минуты
+        staleTime: 2 * 60 * 1000,
     });
 
+    let content: React.ReactNode;
+
     if (isLoading) {
-        return <WidgetShell title="Яндекс Почта" icon={<Mail />} isLoading />;
-    }
-
-    if (error) {
-        return (
-            <WidgetShell title="Яндекс Почта" icon={<Mail />}>
-                <div className={styles.state}>
-                    <AlertCircle size={18} />
-                    <span>Ошибка подключения к почте</span>
-                </div>
-            </WidgetShell>
+        content = null;
+    } else if (error) {
+        content = (
+            <div className={styles.state}>
+                <AlertCircle size={18} />
+                <span>Ошибка подключения к почте</span>
+            </div>
         );
-    }
-
-    if (!data?.length) {
-        return (
-            <WidgetShell title="Яндекс Почта" icon={<Mail />}>
-                <div className={styles.empty}>Входящие пусты</div>
-            </WidgetShell>
-        );
-    }
-
-    return (
-        <WidgetShell title="Яндекс Почта" icon={<Mail />}>
+    } else if (!data?.length) {
+        content = <div className={styles.empty}>Входящие пусты</div>;
+    } else {
+        content = (
             <ul className={styles.list}>
                 {data.map((email) => (
                     <li key={email.id} className={`${styles.item} ${email.unread ? styles.unread : ''}`}>
@@ -62,6 +52,12 @@ export function EmailWidget() {
                     </li>
                 ))}
             </ul>
+        );
+    }
+
+    return (
+        <WidgetShell title="Яндекс Почта" icon={<Mail />} isLoading={isLoading}>
+            {content}
         </WidgetShell>
     );
 }

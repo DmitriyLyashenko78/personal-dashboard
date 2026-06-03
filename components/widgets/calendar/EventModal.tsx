@@ -25,7 +25,6 @@ export function EventModal({ isOpen, onClose, onSave, initialData }: EventModalP
     const [color, setColor] = useState<CalendarEvent['color']>('blue');
 
     const fillForm = (data: CalendarEvent | null) => {
-        console.log('[EventModal] fillForm called with:', data);
         if (data && data.id) {
             setTitle(data.title);
             setDescription(data.description || '');
@@ -59,19 +58,14 @@ export function EventModal({ isOpen, onClose, onSave, initialData }: EventModalP
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('[EventModal] handleSubmit called');
 
-        if (!title.trim()) {
-            console.warn('[EventModal] Title is empty, aborting');
-            return;
-        }
+        if (!title.trim()) return;
 
         const [year, month, day] = selectedDate.split('-').map(Number);
         const [startH, startM] = startTime.split(':').map(Number);
         const [endH, endM] = endTime.split(':').map(Number);
 
         const startISO = new Date(year, month - 1, day, startH, startM || 0).toISOString();
-        console.log('[EventModal] startISO:', startISO);
 
         let endISO: string | undefined;
         if (endTime) {
@@ -80,7 +74,6 @@ export function EventModal({ isOpen, onClose, onSave, initialData }: EventModalP
                 const endDate = new Date(endISO);
                 endDate.setDate(endDate.getDate() + 1);
                 endISO = endDate.toISOString();
-                console.log('[EventModal] End time adjusted to next day');
             }
         }
 
@@ -93,9 +86,7 @@ export function EventModal({ isOpen, onClose, onSave, initialData }: EventModalP
             color,
         };
 
-        console.log('[EventModal] Saving event:', eventData);
         onSave(eventData);
-        console.log('[EventModal] onClose called');
         onClose();
     };
 
@@ -195,7 +186,6 @@ export function EventModal({ isOpen, onClose, onSave, initialData }: EventModalP
                         </div>
                     </div>
 
-                    {/* Кнопки — теперь с отладочной рамкой */}
                     <div className={styles.modalActions}>
                         <button
                             type="button"
@@ -206,7 +196,7 @@ export function EventModal({ isOpen, onClose, onSave, initialData }: EventModalP
                         </button>
                         <button
                             type="submit"
-                            className={`${styles.modalButton} ${styles.primary} ${styles.debugBtn}`}
+                            className={`${styles.modalButton} ${styles.primary}`}
                         >
                             {initialData?.id ? 'Сохранить' : 'Добавить'}
                         </button>

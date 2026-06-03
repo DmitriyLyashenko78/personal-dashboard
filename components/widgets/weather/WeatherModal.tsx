@@ -4,28 +4,8 @@ import { useEffect } from 'react';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { X, Sunrise, Sunset, Droplets, Wind, Eye, Cloud, Thermometer, Gauge, Sun } from 'lucide-react';
-import type { LucideProps } from 'lucide-react';
-import type { ComponentType } from 'react';
 import styles from './WeatherModal.module.css';
-
-type WeatherIcon = ComponentType<LucideProps>;
-
-const weatherCodes: Record<number, { label: string; Icon: WeatherIcon }> = {
-    0: { label: 'Ясно', Icon: Sun },
-    1: { label: 'Преимущественно ясно', Icon: Sun },
-    2: { label: 'Переменная облачность', Icon: Cloud },
-    3: { label: 'Пасмурно', Icon: Cloud },
-    45: { label: 'Туман', Icon: Cloud },
-    48: { label: 'Изморозь', Icon: Cloud },
-    51: { label: 'Лёгкая морось', Icon: Droplets },
-    61: { label: 'Дождь', Icon: Droplets },
-    63: { label: 'Сильный дождь', Icon: Droplets },
-    71: { label: 'Снег', Icon: Droplets },
-    80: { label: 'Ливень', Icon: Droplets },
-    95: { label: 'Гроза', Icon: Cloud },
-};
-
-const windDirections = ['С', 'ССВ', 'СВ', 'ВСВ', 'В', 'ВЮВ', 'ЮВ', 'ЮЮВ', 'Ю', 'ЮЮЗ', 'ЮЗ', 'ЗЮЗ', 'З', 'ЗСЗ', 'СЗ', 'ССЗ'];
+import { weatherCodes } from './weatherConstants';
 
 interface HourlyData {
     time: string[];
