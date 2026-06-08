@@ -7,7 +7,6 @@ import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '@/app/providers/ThemeProvider';
 import styles from './Header.module.css';
 
-// ── Кэш времени ──────────────────────────────────────────────
 let currentTime: Date | null = null;
 
 function subscribe(callback: () => void) {
@@ -27,7 +26,6 @@ function getServerSnapshot() {
     return null;
 }
 
-// ── Компонент ────────────────────────────────────────────────
 export default function Header() {
     const now = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
     const { theme, toggleTheme } = useTheme();

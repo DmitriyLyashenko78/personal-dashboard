@@ -1,4 +1,5 @@
 .header {
+    padding: 0 10px 0 10px;
     width: 100%;
     background: var(--bg-header);
     backdrop-filter: blur(10px);

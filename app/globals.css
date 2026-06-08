@@ -80,9 +80,6 @@ html.dark {
   --text-muted: #718096;
 }
 
-/* =========================================
-   ТИПОГРАФИКА И ЭЛЕМЕНТЫ
-   ========================================= */
 ul, ol { list-style: none; }
 a { color: inherit; text-decoration: none; }
 h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
@@ -106,13 +103,9 @@ img, picture, svg { display: block; max-width: 100%; }
 
 main {
   flex: 1 0 auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 10px;
 }
 
-/* =========================================
-   КАСТОМНЫЙ СКРОЛЛБАР
-   ========================================= */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
